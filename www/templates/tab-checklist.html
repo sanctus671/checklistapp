@@ -1,0 +1,180 @@
+<ion-view view-title="Checklist">
+  <ion-content class="padding">
+    <form class="" name="entryForm" novalidate ng-submit="submitChecklist()">
+       
+        
+        <div class="list entry-form"> 
+          <label class="item item-input">
+            <span class="input-label">Site Location</span>
+            <input type="text" name="sitelocation" placeholder="Site Location" ng-model="checklist.siteLocation">
+          </label>            
+          <label class="item item-input item-select">
+            <span class="input-label">Operator</span>
+            <select ng-model="checklist.operator" name="operator">
+                <option>Gary Van Nistelrooy</option>
+                <option>Nathan Rankin</option>
+                <option>Lee Watson</option>
+                <option>Richard Harper</option>
+                <option>Henry Cleary</option>
+                <option>Carl Gibson</option>
+                <option>Alan Gibson</option>
+            </select>
+          </label>
+          <label class="item item-input item-select">
+            <span class="input-label">Plant Name</span>
+            <select ng-model="checklist.plantName" name="plantname">
+                <option>ZX200</option>
+                <option>ZX210</option>
+                <option>ZX160</option>
+                <option>ZX135</option>
+                <option>JD750J</option>
+                <option>A30C</option>
+                <option>A30F</option>
+                <option>ISUZU TIPPER</option>
+                <option>SCANIA TIPPER</option>
+                <option>KENWORTH TRANSPORTER</option>
+            </select>
+          </label>  
+          <div class="item item-input">
+            <span class="input-label">Hub/Odometer/Hour Clock</span>
+            <input type="text" name="hub" placeholder="Hub/Odometer" ng-model="checklist.hub" >
+            <div class="hour-clock-section" ng-click="openTimePicker1()"><i class="icon ion-ios-clock"></i> Hour Clock</div>
+          </div>              
+          <label class="item item-input" >
+            <span class="input-label">Date</span>
+            <input type="text" placeholder="Date" name="date" ng-model="checklist.date" ng-click="openDatePicker()">
+          </label>
+          <label class="item item-input item-select">
+            <span class="input-label">Weather</span>
+            <select ng-model="checklist.weather" name="weather">
+                <option>Fine</option>
+                <option>Wet</option>
+                <option>Overcast</option>
+            </select>
+          </label>             
+             
+          <label class="item item-input item-stacked-label form-seperator">
+            <span class="input-label">Comments</span>
+            <textarea name="comments" placeholder="Comments" ng-model="checklist.comments" rows="5"></textarea>
+          </label>
+
+          <ion-checkbox ng-model="checklist.engineOil" name="engineoil">Engine oil</ion-checkbox>
+          <label class="item item-input">
+            <span class="input-label">Litres Added</span>
+            <input type="text" name="engineoillitres" placeholder="Litres Added" ng-model="checklist.engineOilLitres">
+          </label>           
+          <ion-checkbox ng-model="checklist.radiator" name="radiator">Radiator</ion-checkbox>
+          <ion-checkbox ng-model="checklist.transOil" name="transoil">Trans oil</ion-checkbox>
+          <ion-checkbox ng-model="checklist.brakeOil" name="brakeoil">Brake oil</ion-checkbox>
+          <ion-checkbox ng-model="checklist.hydraulicOil" name="hydraulicoil" class="form-seperator">Hydraulic oil</ion-checkbox>
+          <ion-checkbox ng-model="checklist.grease" name="grease">Auto Grease/Greased</ion-checkbox>
+          <ion-checkbox ng-model="checklist.wheels" name="wheels">Wheels/Tracks/Wheel Nuts</ion-checkbox>
+          <ion-checkbox ng-model="checklist.quickHitch" name="quickhitch">Quick Hitch</ion-checkbox>
+          <ion-checkbox ng-model="checklist.airTanks" name="airtanks">Drained Air Tanks</ion-checkbox>
+          <ion-checkbox ng-model="checklist.chains" name="chains">Chains/Strops Tagged/Onboard</ion-checkbox>
+          <ion-checkbox ng-model="checklist.hoses" name="hoses">Hydraulic Hoses</ion-checkbox>
+          <ion-checkbox ng-model="checklist.lights" name="lights">Lights and Hazards</ion-checkbox>
+          <ion-checkbox ng-model="checklist.fire" name="fire">Fire Extinguisher</ion-checkbox>
+          <ion-checkbox ng-model="checklist.safety" name="safety">Safety Systems</ion-checkbox>
+          <ion-checkbox ng-model="checklist.gauges" name="gauges">Gauges</ion-checkbox>
+          <ion-checkbox ng-model="checklist.windows" name="windows">Mirrors, Windows, Camera</ion-checkbox>
+          <ion-checkbox ng-model="checklist.brake" name="brake">Park Brake/Foot Brake</ion-checkbox>
+          <ion-checkbox ng-model="checklist.tidy" name="tidy">Cab Tidy</ion-checkbox>
+          <ion-checkbox ng-model="checklist.wof" name="wof" class="form-seperator">WOF/COF/Rego/RUC</ion-checkbox>
+          <ion-checkbox ng-model="checklist.hazardAssessment" name="hazardassessment">Hazard Assessment Completed?</ion-checkbox>
+          <ion-checkbox ng-model="checklist.notifiable" name="notifiable">Notifiable Works?</ion-checkbox>
+          <ion-checkbox ng-model="checklist.ppe" name="ppe">PPE Available</ion-checkbox>
+          <label class="item item-input item-select">
+            <span class="input-label">First Aid Kit Location</span>
+            <select ng-model="checklist.firstAidKit" name="firstaidkit">
+                <option>Machine</option>
+                <option>Ute</option>
+            </select>
+          </label>           
+          <ion-checkbox ng-model="checklist.fireLocation" name="firelocation">Fire Extinguisher Location</ion-checkbox>
+          <ion-checkbox ng-model="checklist.signage" name="signage" class="form-seperator">Warning Signage Erected</ion-checkbox>
+          
+          
+          <h2 class="title">General hazards</h2>
+          <ion-checkbox ng-model="checklist.publicAccess" name="publicaccess">Public Access</ion-checkbox>      
+          <ion-checkbox ng-model="checklist.siteVisibility" name="sitevisibility">Site Visibility</ion-checkbox>   
+          <ion-checkbox ng-model="checklist.boredom" name="boredom">Boredom/Fatigue</ion-checkbox>   
+          <ion-checkbox ng-model="checklist.ugServices" name="ugservices">Underground Services</ion-checkbox>  
+          <ion-checkbox ng-model="checklist.ugServicesLocated" name="ugserviceslocated">Services located?</ion-checkbox> 
+          <ion-checkbox ng-model="checklist.trafficManagement" name="trafficmanagement">Traffic Management Reqd</ion-checkbox>   
+          <ion-checkbox ng-model="checklist.overheadServices" name="overheadservices">Overhead Services</ion-checkbox>   
+          <ion-checkbox ng-model="checklist.noise" name="noise">Noise</ion-checkbox>   
+          <ion-checkbox ng-model="checklist.noisePpe" name="noiseppe">PPE Available?</ion-checkbox>   
+          <ion-checkbox ng-model="checklist.slips" name="slips">Slip, Trips and Falls</ion-checkbox> 
+          <label class="item item-input">
+            <span class="input-label">Awareness</span>
+            <input type="text" name="slipsawareness" placeholder="Awareness" ng-model="checklist.slipsAware">
+          </label>               
+          <ion-checkbox ng-model="checklist.fuelSpill" name="fuelspill">Fuel Spillage/Leakage</ion-checkbox>   
+          <label class="item item-input">
+            <span class="input-label">Awareness</span>
+            <input type="text" name="fuelspillsawareness" placeholder="Awareness" ng-model="checklist.fuelSpillAware">
+          </label>            
+          <ion-checkbox ng-model="checklist.workingAlone" name="workingalone">Working Alone?</ion-checkbox>  
+          <ion-checkbox ng-model="checklist.workingAloneCheck" name="workingalonecheck">Check in plans made?</ion-checkbox>  
+          <ion-checkbox ng-model="checklist.proximity" name="proximity">Proximity to Plant</ion-checkbox>   
+          <label class="item item-input">
+            <span class="input-label">Adhere to safe work distances</span>
+            <input type="text" name="proximityawareness" placeholder="Adhere to safe work distances" ng-model="checklist.proximityAware">
+          </label>            
+          <ion-checkbox ng-model="checklist.steep" name="steep">Steep or Uneven Terrain</ion-checkbox>   
+          <label class="item item-input">
+            <span class="input-label">Awareness</span>
+            <input type="text" name="steepawareness" placeholder="Awareness" ng-model="checklist.steepAware">
+          </label>            
+          <ion-checkbox ng-model="checklist.trenches" name="trenches">Exposed Trenches</ion-checkbox>   
+          <label class="item item-input">
+            <span class="input-label">Awareness</span>
+            <input type="text" name="trenchesawareness" placeholder="Awareness" ng-model="checklist.trenchesAware">
+          </label>            
+          <ion-checkbox ng-model="checklist.machinery" name="machinery">Machinery - Moving Parts</ion-checkbox>   
+          <label class="item item-input">
+            <span class="input-label">Awareness</span>
+            <input type="text" name="machineryawareness" placeholder="Awareness" ng-model="checklist.machineryAware">
+          </label>            
+          <ion-checkbox ng-model="checklist.deepDrains" name="deepdrains">Deep Drains</ion-checkbox> 
+          <label class="item item-input">
+            <span class="input-label">Awareness</span>
+            <input type="text" name="deepdrainsawareness" placeholder="Awareness" ng-model="checklist.deepDrainsAware">
+          </label>            
+          <ion-checkbox ng-model="checklist.water" name="water">Water - Drowning</ion-checkbox>   
+          <label class="item item-input">
+            <span class="input-label">Awareness</span>
+            <input type="text" name="waterawareness" placeholder="Awareness" ng-model="checklist.waterAware">
+          </label>            
+          <ion-checkbox ng-model="checklist.sunGlare" name="sunglare">Sun Glare</ion-checkbox>  
+          <label class="item item-input">
+            <span class="input-label">Awareness</span>
+            <input type="text" name="subglareawareness" placeholder="Awareness" ng-model="checklist.sunGlareAware">
+          </label>            
+          <ion-checkbox ng-model="checklist.weatherAppropriate" name="weatherappropriate">Weather Appropriate</ion-checkbox>   
+          <label class="item item-input">
+            <span class="input-label">Awareness</span>
+            <input type="text" name="weatherappropriateawareness" placeholder="Awareness" ng-model="checklist.weatherAppropriateAware">
+          </label>            
+          <ion-checkbox ng-model="checklist.powerTools" name="powertools">Power Tools</ion-checkbox>   
+          <ion-checkbox ng-model="checklist.handTools" name="handtools">Hand Tools</ion-checkbox>   
+          <ion-checkbox ng-model="checklist.plateCompactor" name="platecompactor">Plate Compactor</ion-checkbox>
+          <ion-checkbox ng-model="checklist.pileDriver" name="piledriver">Pile Driver</ion-checkbox> 
+          <ion-checkbox ng-model="checklist.flailHead" name="flailhead">Flail Head</ion-checkbox>  
+          <ion-checkbox ng-model="checklist.flailHeadPpe" name="flailheadppe">PPE Available?</ion-checkbox>   
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Other Site Specific Hazards</span>
+            <textarea name="other" placeholder="Other Site Specific Hazards" ng-model="checklist.other" rows="5"></textarea>
+          </label>          
+          
+          
+        </div>
+       
+
+        <div class="padding">
+            <button type="submit" class="button button-block button-positive">Save</button>
+        </div>
+    </form>
+  </ion-content>
+</ion-view>
