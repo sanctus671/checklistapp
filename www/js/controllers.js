@@ -109,11 +109,13 @@ angular.module('app.controllers', [])
     };
 
     $scope.openDatePicker = function(){
+        cordova.plugins.Keyboard.close();
       ionicDatePicker.openDatePicker(datePickerObj);
     };    
     
     
     $scope.openTimePicker1 = function(){
+        cordova.plugins.Keyboard.close();
         ionicTimePicker.openTimePicker(timePickerObj1);
     }
     
@@ -152,6 +154,7 @@ angular.module('app.controllers', [])
 
                 fileWriter.onwriteend = function(e) {
                   console.log('Write completed.');
+                  console.log(e);
                 };
 
                 fileWriter.onerror = function(e) {
