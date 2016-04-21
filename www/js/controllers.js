@@ -81,7 +81,6 @@ angular.module('app.controllers', [])
     var timePickerObj1 = {
         callback: function (val) {      //Mandatory
           if (typeof (val) === 'undefined') {
-            console.log('Time not selected');
           } else {
             var selectedTime = new Date(val * 1000);
             var ampm = selectedTime.getUTCHours() < 12 ? "am" : "pm";
@@ -99,7 +98,6 @@ angular.module('app.controllers', [])
     
     var datePickerObj = {
       callback: function (val) {  //Mandatory
-        console.log('Return value from the datepicker popup is : ' + val, new Date(val));
         var date = new Date(val)
         $scope.checklist.date = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
       },
@@ -148,15 +146,11 @@ angular.module('app.controllers', [])
 
     $scope.onInitFs = function(fs) {
         //console.log(cordova.file.externalDataDirectory + 'log.txt');
-        fs.root.getFile('log.txt', {create: true}, function(fileEntry) {
-            console.log("getting file");
-
+        fs.root.getFile($scope.checklist.submittedDate + $scope.checklist.submittedAt + '.txt', {create: true}, function(fileEntry) {
             // Create a FileWriter object for our FileEntry (log.txt).
             fileEntry.createWriter(function(fileWriter) {
-                console.log("writing file");
                 fileWriter.onwriteend = function(e) {
                   console.log('Write completed.');
-                  console.log(e);
                 };
 
                 fileWriter.onerror = function(e) {
@@ -180,10 +174,15 @@ angular.module('app.controllers', [])
     $scope.submitChecklist = function(){
         $ionicLoading.show({
             template: 'Submitting checklist...'
-        });        
+        });      
+        
+        var date = new Date();
+        var ampm = date.getUTCHours() < 12 ? "am" : "pm";
+        var min = date.getUTCMinutes() < 10 ? "0" + date.getUTCMinutes() : date.getUTCMinutes();
+        $scope.checklist.submittedDate = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+        $scope.checklist.submittedAt =  date.getUTCHours() + ":" + min + " " + ampm;        
         //window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
         window.webkitStorageInfo.requestQuota(window.PERSISTENT, 1024*1024, function(grantedBytes) {
-            console.log("quota accepted");
           window.requestFileSystem(window.PERSISTENT, grantedBytes, $scope.onInitFs, $scope.errorHandler);
         }, function(e) {
           console.log('Error', e);
@@ -192,11 +191,7 @@ angular.module('app.controllers', [])
     
         console.log($scope.checklist);
         
-        var date = new Date();
-        var ampm = date.getUTCHours() < 12 ? "am" : "pm";
-        var min = date.getUTCMinutes() < 10 ? "0" + date.getUTCMinutes() : date.getUTCMinutes();
-        $scope.checklist.submittedDate = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
-        $scope.checklist.submittedAt =  date.getUTCHours() + ":" + min + " " + ampm;
+
         
         
         MainService.submitChecklist($scope.checklist).then(function(){
