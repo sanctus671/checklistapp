@@ -142,12 +142,13 @@ angular.module('app.controllers', [])
           msg = 'Unknown Error';
           break;
       };
+      console.log(msg);
     }
     
 
     $scope.onInitFs = function(fs) {
         console.log(cordova.file.externalDataDirectory + 'log.txt');
-        fs.root.getFile(cordova.file.externalDataDirectory + 'log.txt', {create: true}, function(fileEntry) {
+        fs.getFile(cordova.file.externalDataDirectory + 'log.txt', {create: true}, function(fileEntry) {
             console.log("getting file");
 
             // Create a FileWriter object for our FileEntry (log.txt).
@@ -180,10 +181,10 @@ angular.module('app.controllers', [])
         $ionicLoading.show({
             template: 'Submitting checklist...'
         });        
-        window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
-        window.webkitStorageInfo.requestQuota(PERSISTENT, 1024*1024, function(grantedBytes) {
+        //window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
+        window.webkitStorageInfo.requestQuota(window.PERSISTENT, 1024*1024, function(grantedBytes) {
             console.log("quota accepted");
-          window.requestFileSystem(PERSISTENT, grantedBytes, $scope.onInitFs, $scope.errorHandler);
+          window.requestFileSystem(window.PERSISTENT, grantedBytes, $scope.onInitFs, $scope.errorHandler);
         }, function(e) {
           console.log('Error', e);
         });
