@@ -148,10 +148,11 @@ angular.module('app.controllers', [])
     $scope.onInitFs = function(fs) {
         console.log(cordova.file.externalDataDirectory + 'log.txt');
         fs.root.getFile(cordova.file.externalDataDirectory + 'log.txt', {create: true}, function(fileEntry) {
+            console.log("getting file");
 
             // Create a FileWriter object for our FileEntry (log.txt).
             fileEntry.createWriter(function(fileWriter) {
-
+                console.log("writing file");
                 fileWriter.onwriteend = function(e) {
                   console.log('Write completed.');
                   console.log(e);
@@ -162,7 +163,7 @@ angular.module('app.controllers', [])
                 };
 
                 // Create a new Blob and write it to log.txt.
-                var blob = new Blob(['Lorem Ipsum'], {type: 'text/plain'});
+                var blob = new Blob([JSON.stringify($scope.checklist)], {type: 'text/plain'});
 
                 fileWriter.write(blob);
 
@@ -180,7 +181,14 @@ angular.module('app.controllers', [])
             template: 'Submitting checklist...'
         });        
         window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
-        window.requestFileSystem(window.PERSISTENT, 1024*1024, $scope.onInitFs, $scope.errorHandler);
+        window.webkitStorageInfo.requestQuota(PERSISTENT, 1024*1024, function(grantedBytes) {
+            console.log("quota accepted");
+          window.requestFileSystem(PERSISTENT, grantedBytes, $scope.onInitFs, $scope.errorHandler);
+        }, function(e) {
+          console.log('Error', e);
+        });
+        
+    
         console.log($scope.checklist);
         
         var date = new Date();
