@@ -88,6 +88,6 @@ angular.module('app', ['ionic', 'app.controllers', 'app.services', 'ionic-datepi
 })
 
 
-.constant('API_URL', 'http://www.taylorhamling.com/aggchecklist/index.php')
+.constant('API_URL', 'http://aggchecklist.taylorhamling.com/index.php?key=n3jk42n3kdnsfjsnfjn345j')
 
 ;
