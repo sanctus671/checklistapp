@@ -146,8 +146,8 @@ angular.module('app.controllers', [])
     
 
     $scope.onInitFs = function(fs) {
-
-        fs.root.getFile('log.txt', {create: true}, function(fileEntry) {
+        console.log(cordova.file.externalDataDirectory + '/log.txt');
+        fs.root.getFile(cordova.file.externalDataDirectory + '/log.txt', {create: true}, function(fileEntry) {
 
             // Create a FileWriter object for our FileEntry (log.txt).
             fileEntry.createWriter(function(fileWriter) {

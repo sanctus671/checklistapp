@@ -10,22 +10,23 @@
   <content src="index.html"/>
   <access origin="*"/>
   <preference name="phonegap-version" value="cli-5.2.0" /> 
-	<preference name="permissions" value="none" />
-	<preference name="orientation" value="default" />
-	<preference name="target-device" value="universal" />
-	<preference name="fullscreen" value="true" />
-	<preference name="webviewbounce" value="true" />
-	<preference name="prerendered-icon" value="true" />
-	<preference name="stay-in-webview" value="false" />
-	<preference name="ios-statusbarstyle" value="black-opaque" />
-	<preference name="detect-data-types" value="true" />
-	<preference name="exit-on-suspend" value="false" />
-	<preference name="show-splash-screen-spinner" value="true" />
-	<preference name="auto-hide-splash-screen" value="true" />
-	<preference name="SplashScreenDelay" value="5000" />	
-	<preference name="disable-cursor" value="false" />
-	<preference name="android-minSdkVersion" value="7" />
-	<preference name="android-installLocation" value="auto" />
+    <preference name="permissions" value="none" />
+    <preference name="orientation" value="default" />
+    <preference name="target-device" value="universal" />
+    <preference name="fullscreen" value="false" />
+    <preference name="webviewbounce" value="true" />
+    <preference name="prerendered-icon" value="true" />
+    <preference name="stay-in-webview" value="false" />
+    <preference name="ios-statusbarstyle" value="black-opaque" />
+    <preference name="detect-data-types" value="true" />
+    <preference name="exit-on-suspend" value="false" />
+	
+    <preference name="disable-cursor" value="false" />
+    <preference name="android-minSdkVersion" value="15" />
+    <preference name="android-installLocation" value="auto" />
+
+	<gap:plugin name="cordova-plugin-statusbar" source="npm"/>	
+	<gap:plugin name="ionic-plugin-keyboard" source="npm" version="1.0.8"/>	
   
   <gap:plugin name="cordova-plugin-file" source="npm"/>
   
