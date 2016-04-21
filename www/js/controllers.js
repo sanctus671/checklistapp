@@ -147,7 +147,9 @@ angular.module('app.controllers', [])
     $scope.onInitFs = function(fs) {
         //console.log(cordova.file.externalDataDirectory + 'log.txt');
         console.log($scope.checklist.filename);
-        fs.root.getFile("checklist" + $scope.checklist.filename + ".txt", {create: true}, function(fileEntry) {
+        var date = new Date();
+        $scope.checklist.filename = "checklist" + date.UTC() + ".txt";
+        fs.root.getFile($scope.checklist.filename, {create: true}, function(fileEntry) {
             // Create a FileWriter object for our FileEntry (log.txt).
             fileEntry.createWriter(function(fileWriter) {
                 fileWriter.onwriteend = function(e) {
@@ -182,7 +184,6 @@ angular.module('app.controllers', [])
         var min = date.getUTCMinutes() < 10 ? "0" + date.getUTCMinutes() : date.getUTCMinutes();
         $scope.checklist.submittedDate = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
         $scope.checklist.submittedAt =  date.getUTCHours() + ":" + min + " " + ampm;   
-        $scope.checklist.filename = "" + date.getDate() + (date.getMonth() + 1) + date.getFullYear() + date.getUTCHours() + min + ampm;
         //window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
         window.webkitStorageInfo.requestQuota(window.PERSISTENT, 1024*1024, function(grantedBytes) {
           window.requestFileSystem(window.PERSISTENT, grantedBytes, $scope.onInitFs, $scope.errorHandler);
