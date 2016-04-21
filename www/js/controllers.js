@@ -146,10 +146,11 @@ angular.module('app.controllers', [])
 
     $scope.onInitFs = function(fs) {
         //console.log(cordova.file.externalDataDirectory + 'log.txt');
-        console.log($scope.checklist.filename);
+
         var date = new Date();
         $scope.checklist.filename = "checklist" + date.UTC() + ".txt";
-        fs.root.getFile($scope.checklist.filename, {create: true}, function(fileEntry) {
+        console.log($scope.checklist.filename);
+        fs.root.getFile("checklist" + date.UTC() + ".txt", {create: true}, function(fileEntry) {
             // Create a FileWriter object for our FileEntry (log.txt).
             fileEntry.createWriter(function(fileWriter) {
                 fileWriter.onwriteend = function(e) {
