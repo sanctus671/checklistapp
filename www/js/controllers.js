@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
 
-.controller('ChecklistCtrl', function($scope,ionicTimePicker,ionicDatePicker, MainService, $ionicLoading, $ionicPopup) {
+.controller('ChecklistCtrl', function($scope,ionicTimePicker,ionicDatePicker, MainService, $ionicLoading, $ionicPopup, $timeout) {
     $scope.checklist = {
         siteLocation:null,
         operator:null,
@@ -109,13 +109,13 @@ angular.module('app.controllers', [])
     };
 
     $scope.openDatePicker = function(){
-        cordova.plugins.Keyboard.close();
+       $timeout(function(){cordova.plugins.Keyboard.close();},500);
       ionicDatePicker.openDatePicker(datePickerObj);
     };    
     
     
     $scope.openTimePicker1 = function(){
-        cordova.plugins.Keyboard.close();
+        $timeout(function(){cordova.plugins.Keyboard.close();},500);
         ionicTimePicker.openTimePicker(timePickerObj1);
     }
     
@@ -146,8 +146,8 @@ angular.module('app.controllers', [])
     
 
     $scope.onInitFs = function(fs) {
-        console.log(cordova.file.externalDataDirectory + '/log.txt');
-        fs.root.getFile(cordova.file.externalDataDirectory + '/log.txt', {create: true}, function(fileEntry) {
+        console.log(cordova.file.externalDataDirectory + 'log.txt');
+        fs.root.getFile(cordova.file.externalDataDirectory + 'log.txt', {create: true}, function(fileEntry) {
 
             // Create a FileWriter object for our FileEntry (log.txt).
             fileEntry.createWriter(function(fileWriter) {
@@ -179,8 +179,17 @@ angular.module('app.controllers', [])
         $ionicLoading.show({
             template: 'Submitting checklist...'
         });        
+        window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
         window.requestFileSystem(window.PERSISTENT, 1024*1024, $scope.onInitFs, $scope.errorHandler);
         console.log($scope.checklist);
+        
+        var date = new Date();
+        var ampm = date.getUTCHours() < 12 ? "am" : "pm";
+        var min = date.getUTCMinutes() < 10 ? "0" + date.getUTCMinutes() : date.getUTCMinutes();
+        $scope.checklist.submittedDate = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
+        $scope.checklist.submittedAt =  date.getUTCHours() + ":" + min + " " + ampm;
+        
+        
         MainService.submitChecklist($scope.checklist).then(function(){
             $scope.checklist = angular.copy($scope.blankChecklist);
             $ionicLoading.hide();

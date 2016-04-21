@@ -5,8 +5,7 @@
             <button class="button button-block button-positive" ng-click="doSync()">Sync with database</button>
         </ion-item>
       <ion-item class="item-icon-right" ng-repeat="checklist in checklists" href="#/tab/history/{{$index}}">
-        <img ng-src="{{chat.face}}">
-        <h2>Checklist submitted on {{checklist.date}} at {{checklist.finishTime}}</h2>
+        <h2>Checklist submitted on {{checklist.submittedDate}} at {{checklist.submittedAt}}</h2>
         <p>Operator: {{checklist.operator}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
 
