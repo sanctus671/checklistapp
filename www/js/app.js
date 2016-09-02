@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'app.controllers', 'app.services', 'ionic-datepicker', 'ionic-timepicker'])
+angular.module('app', ['ionic', 'app.controllers', 'app.services', 'ionic-datepicker', 'ionic-timepicker', 'ionic-multiselect'])
 
 .run(function($ionicPlatform, $rootScope, MainService) {
   $ionicPlatform.ready(function() {
@@ -79,6 +79,15 @@ angular.module('app', ['ionic', 'app.controllers', 'app.services', 'ionic-datepi
         }
       }
     })
+    .state('tab.history-draft-detail', {
+      url: '/history/draft/:historyId',
+      views: {
+        'tab-history': {
+          templateUrl: 'templates/history-draft-detail.html',
+          controller: 'HistoryDraftDetailCtrl'
+        }
+      }
+    })    
 
 
 

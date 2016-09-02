@@ -4,9 +4,24 @@
         <ion-item>
             <button class="button button-block button-positive" ng-click="doSync()">Sync with database</button>
         </ion-item>
+        
+        <ion-item class="item-divider" ng-if="draftChecklists.length > 0">
+            Draft Checklists
+        </ion-item>
+      <ion-item class="item-icon-right" ng-repeat="draftChecklist in draftChecklists" href="#/tab/history/draft/{{$index}}">
+        <h2>Draft checklist saved on {{draftChecklist.submittedDate}} at {{draftChecklist.submittedAt}}</h2>
+        <p>Operator/s: {{draftChecklist.operator}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+
+      </ion-item>
+        
+        <ion-item class="item-divider" ng-if="draftChecklists.length > 0">
+            Submitted Checklists
+        </ion-item>        
+        
       <ion-item class="item-icon-right" ng-repeat="checklist in checklists" href="#/tab/history/{{$index}}">
         <h2>Checklist submitted on {{checklist.submittedDate}} at {{checklist.submittedAt}}</h2>
-        <p>Operator: {{checklist.operator}}</p>
+        <p>Operator/s: {{checklist.operator}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
 
       </ion-item>

@@ -89,6 +89,39 @@ angular.module('app.services', [])
             window.localStorage.checklists = JSON.stringify([checklist]);
         }
     };
+    
+    this.saveDraftChecklist = function(checklist){
+        var checklists = MainService.getDraftChecklists();
+        if (checklists){
+            checklists.push(checklist);
+            window.localStorage.draft_checklists = JSON.stringify(checklists);
+        }
+        else{
+            window.localStorage.draft_checklists = JSON.stringify([checklist]);
+        }
+    };    
+
+    this.getDraftChecklists = function(){
+        var data = window.localStorage.draft_checklists ? JSON.parse(window.localStorage.draft_checklists) : null;
+        return data;
+    }; 
+    
+    this.getDraftChecklist = function(index){
+        var data = window.localStorage.draft_checklists ? JSON.parse(window.localStorage.draft_checklists) : null;
+        if (data){
+            return data[index];
+        }
+        return data;
+    }; 
+    
+    this.removeDraftChecklist = function(index){
+        var data = window.localStorage.draft_checklists ? JSON.parse(window.localStorage.draft_checklists) : null;
+        if (data){
+            data.splice(index, 1);
+        }
+        window.localStorage.draft_checklists = JSON.stringify(data);
+    };     
+
 
     this.getChecklists = function(){
         var data = window.localStorage.checklists ? JSON.parse(window.localStorage.checklists) : null;

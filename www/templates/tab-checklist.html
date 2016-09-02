@@ -8,33 +8,39 @@
             <span class="input-label">Site Location</span>
             <input type="text" name="sitelocation" placeholder="Site Location" ng-model="checklist.siteLocation">
           </label>            
-          <label class="item item-input item-select">
-            <span class="input-label">Operator</span>
-            <select ng-model="checklist.operator" name="operator">
-                <option>Gary Van Nistelrooy</option>
-                <option>Nathan Rankin</option>
-                <option>Lee Watson</option>
-                <option>Richard Harper</option>
-                <option>Henry Cleary</option>
-                <option>Carl Gibson</option>
-                <option>Alan Gibson</option>
-            </select>
-          </label>
-          <label class="item item-input item-select">
-            <span class="input-label">Plant Name</span>
-            <select ng-model="checklist.plantName" name="plantname">
-                <option>ZX200</option>
-                <option>ZX210</option>
-                <option>ZX160</option>
-                <option>ZX135</option>
-                <option>JD750J</option>
-                <option>A30C</option>
-                <option>A30F</option>
-                <option>ISUZU TIPPER</option>
-                <option>SCANIA TIPPER</option>
-                <option>KENWORTH TRANSPORTER</option>
-            </select>
+
+        <multiselect
+          header-text="Operators"
+          items="operators"
+          text-property="text"
+          value-property="text"
+          text="Select Operators"
+          modal-template-url="lib/ionic-multiselect/dist/templates/modal-template.html"
+          template-url="lib/ionic-multiselect/dist/templates/item-template.html"
+          value-changed="onOperatorChanged(value)"
+          class="operators-select">
+        </multiselect> 
+          <label class="item item-input" ng-show="operators[operators.length - 1].checked">
+            <span class="input-label">Other Operator</span>
+            <input type="text" name="otheroperator" placeholder="Enter other operators name" ng-model="checklist.operatorOther">
           </label>  
+            
+        <multiselect
+          header-text="Plants"
+          items="plants"
+          text-property="text"
+          value-property="text"
+          text="Select Plants"
+          modal-template-url="lib/ionic-multiselect/dist/templates/modal-template.html"
+          template-url="lib/ionic-multiselect/dist/templates/item-template.html"
+          value-changed="onPlantChanged(value)" 
+          class="plants-select">
+        </multiselect> 
+            
+          <label class="item item-input" ng-show="plants[plants.length - 1].checked">
+            <span class="input-label">Other Plant</span>
+            <input type="text" name="otherplant" placeholder="Enter other plants name" ng-model="checklist.plantOther">
+          </label>               
           <div class="item item-input">
             <span class="input-label">Hub/Odometer/Hour Clock</span>
             <input type="text" name="hub" placeholder="Hub/Odometer" ng-model="checklist.hub" >
@@ -80,7 +86,11 @@
           <ion-checkbox ng-model="checklist.windows" name="windows">Mirrors, Windows, Camera</ion-checkbox>
           <ion-checkbox ng-model="checklist.brake" name="brake">Park Brake/Foot Brake</ion-checkbox>
           <ion-checkbox ng-model="checklist.tidy" name="tidy">Cab Tidy</ion-checkbox>
-          <ion-checkbox ng-model="checklist.wof" name="wof" class="form-seperator">WOF/COF/Rego/RUC</ion-checkbox>
+          <ion-checkbox ng-model="checklist.wof" name="wof">WOF/COF/Rego/RUC</ion-checkbox>
+          <label class="item item-input item-stacked-label form-seperator">
+            <span class="input-label">Comments</span>
+            <textarea name="wofcomments" placeholder="Comments" ng-model="checklist.wofComments" rows="5"></textarea>
+          </label>            
           <ion-checkbox ng-model="checklist.hazardAssessment" name="hazardassessment">Hazard Assessment Completed?</ion-checkbox>
           <ion-checkbox ng-model="checklist.notifiable" name="notifiable">Notifiable Works?</ion-checkbox>
           <ion-checkbox ng-model="checklist.ppe" name="ppe">PPE Available</ion-checkbox>
@@ -92,8 +102,16 @@
             </select>
           </label>           
           <ion-checkbox ng-model="checklist.fireLocation" name="firelocation">Fire Extinguisher Location</ion-checkbox>
-          <ion-checkbox ng-model="checklist.signage" name="signage" class="form-seperator">Warning Signage Erected</ion-checkbox>
+          <ion-checkbox ng-model="checklist.signage" name="signage">Warning Signage Erected</ion-checkbox>
           
+          <label class="item item-input item-select">
+            <span class="input-label form-seperator">Resource Consent Required</span>
+            <select ng-model="checklist.consentRequired" name="consentrequired">
+                <option>One Plan</option>
+                <option>CoP</option>
+                <option>Copy Onsite</option>
+            </select>
+          </label>           
           
           <h2 class="title">General hazards</h2>
           <ion-checkbox ng-model="checklist.publicAccess" name="publicaccess">Public Access</ion-checkbox>      
@@ -163,16 +181,26 @@
           <ion-checkbox ng-model="checklist.pileDriver" name="piledriver">Pile Driver</ion-checkbox> 
           <ion-checkbox ng-model="checklist.flailHead" name="flailhead">Flail Head</ion-checkbox>  
           <ion-checkbox ng-model="checklist.flailHeadPpe" name="flailheadppe">PPE Available?</ion-checkbox>   
-          <label class="item item-input item-stacked-label">
+          <label class="item item-input item-stacked-label form-seperator">
             <span class="input-label">Other Site Specific Hazards</span>
             <textarea name="other" placeholder="Other Site Specific Hazards" ng-model="checklist.other" rows="5"></textarea>
-          </label>          
+          </label>    
           
           
-        </div>
+          <h2 class="title">Visitors Log (if required)</h2>          
+          <label class="item item-input">
+            <span class="input-label">Visitor Name</span>
+            <input type="text" name="visitorname" placeholder="Visitor Name" ng-model="checklist.visitorName">
+          </label>            
        
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Comments</span>
+            <textarea name="visitorcomments" placeholder="Comments" ng-model="checklist.visitorComments" rows="5"></textarea>
+          </label>           
+        </div>
 
         <div class="padding">
+            <a class="button button-block button-positive" ng-click="saveDraftChecklist()">Save Draft</a>
             <button type="submit" class="button button-block button-positive">Save</button>
         </div>
     </form>
