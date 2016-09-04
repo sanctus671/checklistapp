@@ -233,6 +233,13 @@ angular.module('app.controllers', [])
 
 
     $scope.submitChecklist = function(){
+        if (!$scope.checklist.operator){
+            $ionicPopup.alert({
+            title: 'Error',
+            template: "You must choose an operator."
+            });   
+            return;
+        }
         $ionicLoading.show({
             template: 'Submitting checklist...'
         });      
@@ -256,28 +263,7 @@ angular.module('app.controllers', [])
         
         
         MainService.submitChecklist($scope.checklist).then(function(){
-            $scope.checklist = angular.copy($scope.blankChecklist);
-            for (var index in $scope.operators){
-                $scope.operators[index].checked = false;
-            }
-            for (var index in $scope.plants){
-                $scope.plants[index].checked = false;
-            }   
-            
-            var operatorElements = document.querySelectorAll(".operators-select .list div");
-            for (var index in operatorElements){
-                if (parseInt(index) !== 0){
-                    operatorElements[index].outerHTML = "";
-                }
-            }        
-            var plantElements = document.querySelectorAll(".plants-select .list div");
-            for (var index in plantElements){
-                if (parseInt(index) !== 0){
-                    plantElements[index].outerHTML = "";
-                }
-            }             
-            document.querySelector(".operators-select .list div").innerHTML = "Select Operators";
-            document.querySelector(".plants-select .list div").innerHTML = "Select Plants";            
+            $scope.resetForm();            
             $ionicLoading.hide();
             //connected to internet
             $ionicPopup.alert({
@@ -285,7 +271,7 @@ angular.module('app.controllers', [])
             template: "Checklist submitted!"
             });             
         },function(){
-            $scope.checklist = angular.copy($scope.blankChecklist);
+            $scope.resetForm();
             $ionicLoading.hide();
             //not connected to internet
             $ionicPopup.alert({
@@ -308,6 +294,11 @@ angular.module('app.controllers', [])
         subTitle: 'Draft saved',
         template: "To access and resume this checklist, go to the history tab"
         });  
+        $scope.resetForm();        
+        
+    }
+    
+    $scope.resetForm = function(){
         $scope.checklist = angular.copy($scope.blankChecklist);
         for (var index in $scope.operators){
             $scope.operators[index].checked = false;
@@ -329,8 +320,7 @@ angular.module('app.controllers', [])
             }
         }         
         document.querySelector(".operators-select .list div").innerHTML = "Select Operators";
-        document.querySelector(".plants-select .list div").innerHTML = "Select Plants";        
-        
+        document.querySelector(".plants-select .list div").innerHTML = "Select Plants";          
     }
     
     $rootScope.$on("resumeDraft", function(event, data){
