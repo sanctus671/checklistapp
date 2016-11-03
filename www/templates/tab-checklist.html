@@ -11,7 +11,7 @@
 
         <multiselect
           header-text="Operators"
-          items="operators"
+          items="operators2"
           text-property="text"
           value-property="text"
           text="Select Operators"
@@ -20,14 +20,14 @@
           value-changed="onOperatorChanged(value)"
           class="operators-select">
         </multiselect> 
-          <label class="item item-input" ng-show="operators[operators.length - 1].checked">
+          <label class="item item-input" ng-show="operators2[operators2.length - 1].checked">
             <span class="input-label">Other Operator</span>
             <input type="text" name="otheroperator" placeholder="Enter other operators name" ng-model="checklist.operatorOther">
           </label>  
             
         <multiselect
           header-text="Plants"
-          items="plants"
+          items="plants2"
           text-property="text"
           value-property="text"
           text="Select Plants"
@@ -37,7 +37,7 @@
           class="plants-select">
         </multiselect> 
             
-          <label class="item item-input" ng-show="plants[plants.length - 1].checked">
+          <label class="item item-input" ng-show="plants2[plants2.length - 1].checked">
             <span class="input-label">Other Plant</span>
             <input type="text" name="otherplant" placeholder="Enter other plants name" ng-model="checklist.plantOther">
           </label>               
@@ -185,6 +185,24 @@
             <span class="input-label">Other Site Specific Hazards</span>
             <textarea name="other" placeholder="Other Site Specific Hazards" ng-model="checklist.other" rows="5"></textarea>
           </label>    
+          
+          <span ng-if="ohauQuarry">
+              <h2 class="title">Weekly Inspections</h2>
+            <ion-checkbox ng-model="checklist.roadsHaulage" name="roadshaulage">Roads & Haulage</ion-checkbox>   
+            <ion-checkbox ng-model="checklist.facesBenches" name="facesbenches">Faces & Benches</ion-checkbox>   
+            <ion-checkbox ng-model="checklist.weeklyPlant" name="weeklyplant">Plant</ion-checkbox>
+            <ion-checkbox ng-model="checklist.otherWorkingAreas" name="otherworkingareas">Other Working Areas</ion-checkbox> 
+            <ion-checkbox ng-model="checklist.weeklyHazardAreas" name="weeklyhazardareas">Hazard Areas & Safety Equipment</ion-checkbox>  
+            <ion-checkbox ng-model="checklist.allPlantBuildings" name="allplantbuildings">All Plant & Buildings</ion-checkbox>   
+            <ion-checkbox ng-model="checklist.allFacesRoadways" name="allfacesroadways">All Faces & Roadways</ion-checkbox>  
+            <ion-checkbox ng-model="checklist.allStockpilesDumps" name="allstockpiledumps">All Stockpiles & Dumps</ion-checkbox>  
+            <ion-checkbox ng-model="checklist.allWorkingAreas" name="allworkingareas">All Working Areas & Surrounds</ion-checkbox>  
+            <ion-checkbox ng-model="checklist.weeklyEmergencyEquipment" name="weeklyemergencyeqipment">Emergency Equipment</ion-checkbox>  
+            <label class="item item-input item-stacked-label form-seperator">
+              <span class="input-label">Remarks</span>
+              <textarea name="remarks" placeholder="Remarks" ng-model="checklist.remarks" rows="5"></textarea>
+            </label>
+          </span>         
           
           
           <h2 class="title">Visitors Log (if required)</h2>          

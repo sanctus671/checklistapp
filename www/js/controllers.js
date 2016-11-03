@@ -2,7 +2,7 @@ angular.module('app.controllers', [])
 
 .controller('ChecklistCtrl', function($scope,ionicTimePicker,ionicDatePicker, MainService, $ionicLoading, $ionicPopup, $timeout, $rootScope) {
     $scope.checklist = {
-        siteLocation:null,
+        siteLocation:"Ohau Quarry",
         operator:null,
         operatorOther:null,
         plantName:null,
@@ -77,12 +77,26 @@ angular.module('app.controllers', [])
         flailHead:null,
         flailHeadPpe:null,
         other:null,
+        roadsHaulage:null,
+        facesBenches:null,
+        weeklyPlant:null,
+        otherWorkingAreas:null,
+        weeklyHazardAreas:null,
+        allPlantBuildings:null,
+        allFacesRoadways:null,
+        allStockpilesDumps:null,
+        allWorkingAreas:null,
+        weeklyEmergencyEquipment:null,
+        remarks:null,
         visitorName:null,
         visitorComments:null
     };
     
-    $scope.blankChecklist = angular.copy($scope.checklist);
+    $scope.ohauQuarry = true; //for other version of app
+
     
+    $scope.blankChecklist = angular.copy($scope.checklist);
+
     $scope.operators = [
         {id:1, text:"Gary Van Nistelrooy", checked:false},
         {id:2, text:"Nathan Rankin", checked:false},
@@ -91,6 +105,14 @@ angular.module('app.controllers', [])
         {id:5, text:"Henry Cleary", checked:false},
         {id:6, text:"Carl Gibson", checked:false},
         {id:7, text:"Alan Gibson", checked:false},
+        {id:8, text:"Other", checked:false},
+    ];    
+    
+    
+    
+    $scope.operators2 = [
+        {id:1, text:"Mike", checked:false},
+        {id:2, text:"Peter", checked:false},
         {id:8, text:"Other", checked:false},
     ];
 
@@ -106,7 +128,6 @@ angular.module('app.controllers', [])
         $scope.checklist.operator = operatorText;
     }
     
-    
     $scope.plants = [
         {id:1, text:"ZX200", checked:false},
         {id:2, text:"ZX210", checked:false},
@@ -119,6 +140,16 @@ angular.module('app.controllers', [])
         {id:9, text:"SCANIA TIPPER", checked:false},
         {id:10, text:"KENWORTH TRANSPORTER", checked:false},
         {id:11, text:"Labour", checked:false},
+        {id:12, text:"Other", checked:false},
+        
+    ];
+    
+    
+    $scope.plants2 = [
+        {id:1, text:"ZX2080", checked:false},
+        {id:2, text:"ZW250", checked:false},
+        {id:3, text:"A30D", checked:false},
+        {id:11, text:"L90B", checked:false},
         {id:12, text:"Other", checked:false},
         
     ];
